@@ -20,7 +20,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.devdroid.savesmart.BudgetViewModel
+import com.devdroid.savesmart.DetailedBudgetScreen
+import com.devdroid.savesmart.viewmodel.BudgetViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -64,7 +65,8 @@ fun BudgetScreen(navController: NavController, viewModel: BudgetViewModel) {
         "July", "August", "September", "October", "November", "December"
     )
     val categories = listOf(
-        "Shopping", "Traveling", "Food", "Goods", "Gifting"
+        "Groceries", "Transportation", "Entertainment", "Food & Dining",
+        "Shopping", "Bills & Utilities", "Healthcare", "Education", "Travel", "Other"
     )
 
     // Check if user is logged in

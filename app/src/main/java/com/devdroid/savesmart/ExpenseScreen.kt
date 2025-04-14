@@ -1,6 +1,3 @@
-package com.devdroid.savesmart
-
-
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -11,7 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.Modifiera
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
@@ -236,10 +233,4 @@ fun ExpenseScreen(
         }
     }
 }
-
-
-
-
-
-
 

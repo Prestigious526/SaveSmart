@@ -11,7 +11,9 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class TransactionViewModel : ViewModel() {
     private val db = Firebase.firestore
@@ -25,6 +27,24 @@ class TransactionViewModel : ViewModel() {
 
     private val _totalExpenses = MutableStateFlow(0)
     val totalExpenses: StateFlow<Int> = _totalExpenses
+
+    fun getExpensesByCategoryAndMonth(category: String, month: String, year: String): List<Transaction> {
+        return _transactions.value.filter { transaction ->
+            transaction.type == "Expense" &&
+                    transaction.category.equals(category, ignoreCase = true) &&
+                    transaction.date.toDate().getMonthName().equals(month, ignoreCase = true) &&
+                    transaction.date.toDate().getYearString() == year
+        }
+    }
+
+    // Helper extension functions
+    private fun Date.getMonthName(): String {
+        return SimpleDateFormat("MMMM", Locale.getDefault()).format(this)
+    }
+
+    private fun Date.getYearString(): String {
+        return SimpleDateFormat("yyyy", Locale.getDefault()).format(this)
+    }
 
     fun addIncome(amount: Int, category: String, note: String = "", onComplete: (Boolean) -> Unit) {
         val user = auth.currentUser
@@ -57,6 +77,7 @@ class TransactionViewModel : ViewModel() {
 
     fun addExpense(amount: Int, category: String, note: String = "", onComplete: (Boolean) -> Unit) {
         val user = auth.currentUser
+
         if (user == null) {
             Log.e("Firestore", "User not logged in")
             onComplete(false)
@@ -115,10 +136,10 @@ class TransactionViewModel : ViewModel() {
                         } else {
                             expenseSum += amount // This will add a negative number
                         }
-                        
+
                         val type = if (amount < 0) "Expense" else "Income"
                         val timestamp = Timestamp(Date(timestampLong))
-                        
+
                         Transaction(
                             id = id,
                             amount = amount,
@@ -129,12 +150,12 @@ class TransactionViewModel : ViewModel() {
                         )
                     } else null
                 }
-                
+
                 // Update all state flows
                 _transactions.value = transactionList
                 _totalIncome.value = incomeSum
                 _totalExpenses.value = expenseSum
-                
+
                 Log.d("SaveSmart", "Fetched transactions: ${transactionList.size}, Income: $incomeSum, Expenses: $expenseSum")
             }
             .addOnFailureListener { e ->
@@ -146,11 +167,11 @@ class TransactionViewModel : ViewModel() {
     fun fetchTransactions() {
         fetchAllTransactions()
     }
-    
+
     fun fetchTotalIncome() {
         fetchAllTransactions()
     }
-    
+
     fun fetchTotalExpenses() {
         fetchAllTransactions()
     }

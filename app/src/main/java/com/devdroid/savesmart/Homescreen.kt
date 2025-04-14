@@ -1,7 +1,7 @@
 package com.devdroid.savesmart
 
 import BudgetScreen
-import DetailedBudgetScreen
+import ExpenseScreen
 import android.os.Build
 import android.os.Bundle
 import androidx.compose.material3.Icon
@@ -37,6 +37,7 @@ import com.devdroid.savesmart.viewmodel.TransactionViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.devdroid.savesmart.ui.TransactionItem
 import com.devdroid.savesmart.ui.TransactionScreen
+import com.devdroid.savesmart.viewmodel.BudgetViewModel
 
 class Homescreen : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
