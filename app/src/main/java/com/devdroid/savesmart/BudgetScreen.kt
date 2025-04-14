@@ -20,8 +20,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.devdroid.savesmart.DetailedBudgetScreen
-import com.devdroid.savesmart.viewmodel.BudgetViewModel
+import com.devdroid.savesmart.BudgetViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

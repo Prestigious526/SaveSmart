@@ -98,6 +98,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.androidx.recyclerview)
 
     // Testing
     testImplementation(libs.junit)
